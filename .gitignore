@@ -1,0 +1,6 @@
+/activities
+/tests/Bootstrap.php
+/vendor
+
+/composer.lock
+/phpunit.xml

@@ -1,7 +1,7 @@
 Garmin Connect Export
 =====================
 
-Endurance is a PHP library for parsing cycling GPS activities and calculating metrics.
+Provides a simple library for fetching public activities from Garmin Connect and bulk exporting the TCX files.
 
 Usage
 -----

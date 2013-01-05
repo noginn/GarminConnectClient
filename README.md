@@ -25,20 +25,10 @@ foreach ($activities as $activity) {
 
 ```
 
-Running the Tests
------------------
-
-### Setup the vendor directory
-
-As some filesystem adapters use vendor libraries, you should install the vendors:
+Running the export script
+-------------------------
 
     $ cd garmin-connect-exporter
     $ php composer.phar install --dev
 
-### Launch the test suite
-
-In the root directory:
-
-    $ phpunit
-
-Is it green?
+    $ ./bin/export [/path/to/save/files]

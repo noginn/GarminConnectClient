@@ -7,7 +7,8 @@ use Buzz\Browser;
 use Buzz\Client\Curl;
 use Endurance\Exporter\GarminConnect\GarminConnectExporter;
 
-$exportPath = isset($argv[1]) ? $argv[1] : __DIR__ . '/../activities';
+$username = $argv[1];
+$exportPath = isset($argv[2]) ? $argv[2] : __DIR__ . '/../activities';
 
 // Create the export directory if it doesn't exist
 if (!is_dir($exportPath)) {
@@ -17,7 +18,7 @@ if (!is_dir($exportPath)) {
 $browser = new Browser(new Curl());
 $exporter = new GarminConnectExporter($browser);
 
-$activities = $exporter->fetchActivities(100);
+$activities = $exporter->fetchActivities($username, 100);
 foreach ($activities as $activity) {
     $exporter->downloadActivityTCX($activity->getId(), $exportPath . '/' . $activity->getId() . '.tcx');
     print sprintf("Downloading %s (%s)\n", $activity->getId(), $activity->getStartTimeGMT()->format('c'));

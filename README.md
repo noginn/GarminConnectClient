@@ -18,7 +18,7 @@ use Endurance\Exporter\GarminConnect\GarminConnectExporter;
 $browser = new Browser(new Curl());
 $exporter = new GarminConnectExporter($browser);
 
-$activities = $exporter->fetchActivities(100);
+$activities = $exporter->fetchActivities('noginn', 25);
 foreach ($activities as $activity) {
     $exporter->downloadActivityTCX($activity->getId(), __DIR__ . '/activities/' . $activity->getId() . '.tcx');
 }
@@ -31,4 +31,4 @@ Running the export script
     $ cd garmin-connect-exporter
     $ php composer.phar install --dev
 
-    $ ./bin/export [/path/to/save/files]
+    $ ./bin/export username [/path/to/save/files]

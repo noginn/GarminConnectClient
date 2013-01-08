@@ -16,9 +16,9 @@ class GarminConnectExporter
         $this->browser->getClient()->setTimeout(0);
     }
 
-    public function fetchActivities($limit = 50, $start = 1)
+    public function fetchActivities($username, $limit = 50, $start = 1)
     {
-        $response = $this->browser->get('http://connect.garmin.com/proxy/activitylist-service/activities/noginn?limit=' . $limit . '&start=' . $start);
+        $response = $this->browser->get('http://connect.garmin.com/proxy/activitylist-service/activities/' . $username . '?limit=' . $limit . '&start=' . $start);
         $result = json_decode($response->getContent(), true);
 
         return array_map(function ($info) {

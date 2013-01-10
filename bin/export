@@ -8,7 +8,8 @@ use Buzz\Client\Curl;
 use Endurance\Exporter\GarminConnect\GarminConnectExporter;
 
 $username = $argv[1];
-$exportPath = isset($argv[2]) ? $argv[2] : __DIR__ . '/../activities';
+$password = $argv[2];
+$exportPath = isset($argv[3]) ? $argv[3] : __DIR__ . '/../activities';
 
 // Create the export directory if it doesn't exist
 if (!is_dir($exportPath)) {
@@ -16,10 +17,14 @@ if (!is_dir($exportPath)) {
 }
 
 $browser = new Browser(new Curl());
-$exporter = new GarminConnectExporter($browser);
 
-$activities = $exporter->fetchActivities($username, 100);
-foreach ($activities as $activity) {
-    $exporter->downloadActivityTCX($activity->getId(), $exportPath . '/' . $activity->getId() . '.tcx');
-    print sprintf("Downloading %s (%s)\n", $activity->getId(), $activity->getStartTimeGMT()->format('c'));
+try {
+    $exporter = new GarminConnectExporter($browser, $username, $password);
+    $activities = $exporter->fetchActivities($username, 100);
+    foreach ($activities as $activity) {
+        $exporter->downloadActivityTCX($activity->getId(), $exportPath . '/' . $activity->getId() . '.tcx');
+        print sprintf("Downloading %s (%s)\n", $activity->getId(), $activity->getStartTimeGMT()->format('c'));
+    }
+} catch (RuntimeException $exception) {
+    print sprintf("Error: %s\n", $exception->getMessage());
 }

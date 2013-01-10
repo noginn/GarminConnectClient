@@ -1,7 +1,7 @@
-Garmin Connect Export
+Garmin Connect Client
 =====================
 
-Provides a simple library for fetching public activities from Garmin Connect and bulk exporting the TCX files.
+Provides a simple PHP library to interact with the Garmin Connect website and APIs.
 
 Usage
 -----
@@ -13,22 +13,41 @@ Usage
 
 use Buzz\Browser;
 use Buzz\Client\Curl;
-use Endurance\Exporter\GarminConnect\GarminConnectExporter;
+use Endurance\GarminConnect\GarminConnectClient;
+
+$username = 'test';
+$password = 'qwerty';
 
 $browser = new Browser(new Curl());
-$exporter = new GarminConnectExporter($browser);
+$client = new GarminConnectClient($browser, $username, $password);
 
-$activities = $exporter->fetchActivities('noginn', 25);
+$activities = $client->fetchActivities($username, 25);
 foreach ($activities as $activity) {
-    $exporter->downloadActivityTCX($activity->getId(), __DIR__ . '/activities/' . $activity->getId() . '.tcx');
+    $client->downloadActivity($activity->getId(), __DIR__ . '/activities/' . $activity->getId() . '.tcx');
 }
+```
 
+### Upload an activity FIT file
+
+```php
+<?php
+
+use Buzz\Browser;
+use Buzz\Client\Curl;
+use Endurance\GarminConnect\GarminConnectClient;
+
+$username = 'test';
+$password = 'qwerty';
+
+$browser = new Browser(new Curl());
+$client = new GarminConnectClient($browser, $username, $password);
+$client->uploadActivity('/path/to/activity.fit');
 ```
 
 Running the export script
 -------------------------
 
-    $ cd garmin-connect-exporter
-    $ php composer.phar install --dev
+    $ cd garmin-connect-client
+    $ php composer.phar install
 
-    $ ./bin/export username [/path/to/save/files]
+    $ ./bin/export username password [/path/to/save/files]

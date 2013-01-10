@@ -1,6 +1,6 @@
 <?php 
 
-namespace Endurance\Exporter\GarminConnect;
+namespace Endurance\GarminConnect;
 
 class ActivityInfo
 {

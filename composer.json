@@ -1,7 +1,7 @@
 {
-    "name": "noginn/garmin-connect-exporter",
+    "name": "noginn/garmin-connect-client",
     "type": "library",
-    "description": "PHP library to bulk export activities from Garmin Connect",
+    "description": "A simple PHP library to interact with the Garmin Connect website and APIs",
     "keywords": ["cycling", "training", "gps", "garmin"],
     "minimum-stability": "dev",
     "license": "MIT",
@@ -15,6 +15,6 @@
         "kriswallsmith/buzz": ">=0.7"
     },
     "autoload": {
-        "psr-0": { "Endurance\\Exporter\\GarminConnect": "src" }
+        "psr-0": { "Endurance\\GarminConnect": "src" }
     }
 }

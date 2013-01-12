@@ -30,8 +30,6 @@ class GarminConnectClient
 
         // Remove the timeout to allow time to download large files
         $client->setTimeout(0);
-
-        $this->signIn($username, $password);
     }
 
     public function signIn($username, $password)

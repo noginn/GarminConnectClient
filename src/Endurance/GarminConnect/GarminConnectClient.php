@@ -13,7 +13,7 @@ class GarminConnectClient
     protected $browser;
     protected $username;
 
-    public function __construct(Browser $browser, $username, $password)
+    public function __construct(Browser $browser)
     {
         $this->browser = $browser;
 

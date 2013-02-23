@@ -19,7 +19,9 @@ if (!is_dir($exportPath)) {
 $browser = new Browser(new Curl());
 
 try {
-    $client = new GarminConnectClient($browser, $username, $password);
+    $client = new GarminConnectClient($browser);
+    $client->signIn($username, $password);
+
     $activities = $client->fetchActivities($username, 100);
     foreach ($activities as $activity) {
         $client->downloadActivity($activity->getId(), $exportPath . '/' . $activity->getId() . '.tcx');

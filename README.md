@@ -18,8 +18,9 @@ use Endurance\GarminConnect\GarminConnectClient;
 $username = 'test';
 $password = 'qwerty';
 
-$browser = new Browser(new Curl());
-$client = new GarminConnectClient($browser, $username, $password);
+$browser = new Browser(new Curl())
+$client = new GarminConnectClient($browser);
+$client->signIn($username, $password);
 
 $activities = $client->fetchActivities($username, 25);
 foreach ($activities as $activity) {
@@ -40,7 +41,8 @@ $username = 'test';
 $password = 'qwerty';
 
 $browser = new Browser(new Curl());
-$client = new GarminConnectClient($browser, $username, $password);
+$client = new GarminConnectClient($browser);
+$client->signIn($username, $password);
 $client->uploadActivity('/path/to/activity.fit');
 ```
 

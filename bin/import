@@ -1,0 +1,15 @@
+<?php
+
+use Buzz\Browser;
+use Buzz\Client\Curl;
+use Endurance\GarminConnect\GarminConnectClient;
+
+$username = $argv[1];
+$password = $argv[2];
+$importPath = $argv[3];
+
+
+$browser = new Browser(new Curl());
+$client = new GarminConnectClient($browser);
+$client->signIn($username, $password);
+$client->uploadActivity($importPath);
